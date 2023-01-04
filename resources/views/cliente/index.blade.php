@@ -48,7 +48,7 @@
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phones->count() > 0 ? $item->phones[0]->number : '' }}</td>
                                     <td>
-                                        <a href="{{ route('users.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
+                                        <a href="{{ route('cliente.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
                                         <form action="{{ route('users.delete', $item->id) }}" method="POST" style="display: inline" >
                                             @method('DELETE')
                                             @csrf
@@ -103,5 +103,26 @@
             @endif
             {!! $data->appends($_GET)->links() !!}
         @endif
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Default Card Example</h3>
+            <div class="card-tools">
+                <!-- Buttons, labels, and many other things can be placed here! -->
+                <!-- Here is a label for example -->
+                <span class="badge badge-primary">Label</span>
+            </div>
+            <!-- /.card-tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            The body of the card
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            The footer of the card
+        </div>
+        <!-- /.card-footer -->
     </div>
 @stop
