@@ -35,7 +35,3 @@ Route::prefix('produto')->group(function () {
 Route::prefix('venda')->group(function () {
     Route::get('/', [VendaController::class, 'index'])->name('venda.index');
 });
-
-Route::prefix('venda')->group(function () {
-    Route::get('/create', [VendaController::class, 'create'])->name('venda.create');
-});
