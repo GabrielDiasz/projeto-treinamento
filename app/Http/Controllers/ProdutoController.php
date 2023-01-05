@@ -26,7 +26,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +37,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
