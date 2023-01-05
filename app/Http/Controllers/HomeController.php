@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Integer;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $hour = new DateTime('now');
+        $hour = $hour->format('H');
+
+        $name = User::all()[0]->name;
+
+        if ($hour >= 6 && $hour < 12) {
+            $message = 'Bom dia ' . $name . '!';
+        } elseif ($hour >= 12 && $hour < 18) {
+            $message = 'Boa tarde ' . $name . '!';
+        } else {
+            $message = 'Boa noite ' . $name . '!';
+        }
+
+        return view('home', compact('message'));
     }
 }
