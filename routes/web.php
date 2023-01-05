@@ -26,6 +26,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('cliente')->group(function () {
     Route::get('/', [ClienteController::class, 'index'])->name('cliente.index');
+
+    Route::get('/create', [ClienteController::class, 'create'])->name('cliente.create');
+    Route::post('/store', [ClienteController::class, 'store'])->name('cliente.store');
+
+
+    Route::get('/edit/{id}', [ClienteController::class, 'edit'])->name('cliente.edit');
+    Route::put('/update', [ClienteController::class, 'update'])->name('cliente.update');
+
+    Route::delete('/delete/{id}', [ClienteController::class, 'destroy'])->name('cliente.delete');
 });
 
 Route::prefix('produto')->group(function () {
