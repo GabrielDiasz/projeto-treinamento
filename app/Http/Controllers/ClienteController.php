@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ClienteController extends Controller
 {
@@ -14,9 +16,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $data = Cliente::all();
+        $data = Cliente::paginate(10);
 
-        return view('cliente.index');
+        return view('cliente.index', compact('data'));
     }
 
     /**
@@ -26,7 +28,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('cliente.create');
     }
 
     /**
@@ -37,7 +39,19 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $date = new DateTime($request->date);
+        $date = $date->format('d/m/Y');
+
+        Cliente::create([
+            'nome' => $request->name,
+            'cpf' => $request->cpf,
+            'data_nascimento' => $date,
+
+        ]);
+
+
+        return Redirect::route('cliente.index');
     }
 
     /**
@@ -54,34 +68,55 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
+     * @param  int $id
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $data = Cliente::query()->find($id);
+        return view('cliente.edit', compact('data', 'id'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request)
     {
-        //
+//       dd($request);
+
+//        $request->validate([
+//            'id' => 'required',
+//            'nome' => 'required',
+//            'cpf' => 'required',
+//            'data_nascimento' => 'required'
+//        ]);
+
+        $id = $request->id;
+
+        $date = new DateTime($request->date);
+        $date = $date->format('d/m/Y');
+
+        Cliente::find($id)->update([
+            'nome' => $request->name,
+            'cpf' => $request->cpf,
+            'data_nascimento' => $date
+        ]);
+
+        return Redirect::route('cliente.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cliente  $cliente
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        Cliente::destroy($id);
+
+        return Redirect::route('cliente.index');
     }
 }

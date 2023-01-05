@@ -9,7 +9,7 @@
                 <h1><strong>Clientes</strong></h1>
             </div>
             <div class="col sm-6">
-                <a href="#" class="btn btn-primary float-sm-right">
+                <a href="{{ route('cliente.create') }}" class="btn btn-primary float-sm-right">
                     <i class="fas fa-user-plus"></i>
                     Cadastrar Cliente
                 </a>
@@ -32,24 +32,22 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
+                                <th>CPF</th>
+                                <th>Data de Nascimento</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $number = 17
-                            @endphp
+
                             @foreach($data as $item)
                                 <tr>
                                     <th>{{ $item->id }}</th>
-                                    <th>{{ $item->name }}</th>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->phones->count() > 0 ? $item->phones[0]->number : '' }}</td>
+                                    <th>{{ $item->nome }}</th>
+                                    <td>{{ $item->cpf }}</td>
+                                    <td>{{ $item->data_nascimento}}</td>
                                     <td>
                                         <a href="{{ route('cliente.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
-                                        <form action="{{ route('users.delete', $item->id) }}" method="POST" style="display: inline" >
+                                        <form action="{{ route('cliente.delete', $item->id) }}" method="POST" style="display: inline" >
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-danger">
@@ -70,9 +68,6 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        @foreach($item->phones as $phone)
-                                                            {{ $phone->number }} <br>
-                                                        @endforeach
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -87,7 +82,7 @@
                         </table>
                     @else
                         <div>
-                            <h5>Não existe Registro de Usuários</h5>
+                            <h5>Não existe Registro de Clientes</h5>
                         </div>
                     @endif
                 </div>
