@@ -9,11 +9,11 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'cpf', 'data_nascimento'];
+
     //função para relacionar as tabelas do banco de dados
 
-    public function produto(){
-        return $this->belongsToMany('App\Models\Pedido');
+    public function vendas(){
+        return $this->hasMany(Venda::class);
     }
-
-    protected $fillable = ['nome', 'cpf', 'data_nascimento'];
 }

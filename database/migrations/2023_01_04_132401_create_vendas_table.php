@@ -14,19 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vendas', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->timestamps();
 
-            $table->foreignId('clientes_id')->constrained();
-            $table->foreignId('produtos_id')->constrained();
-            
-            /*
-            $table->unsignedBigInteger('clientes_id');
-            $table->foreign('clientes_id')->references('id')->on('clientes');
-            
-            $table->unsignedBigInteger('produtos_id');
-            $table->foreign('produtos_id')->references('id')->on('produtos');
-            */
+            $table->foreignId('cliente_id')->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('venda_produto', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendas_id')->constrained();
-            $table->foreignId('produtos_id')->constrained();            
-            /*
-            $table->unsignedBigInteger('vendas_id');
-            $table->foreign('vendas_id')->references('id')->on('vendas');
-            $table->unsignedBigInteger('produtos_id');
-            $table->foreign('produtos_id')->references('id')->on('produtos');           
-            */
+            $table->foreignId('venda_id')->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
 
-            $table->integer('qtd');            
+            $table->foreignId('produto_id')->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+
+
+            $table->integer('qtd');
             $table->timestamps();
         });
     }
