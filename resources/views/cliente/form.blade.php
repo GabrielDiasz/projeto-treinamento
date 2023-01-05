@@ -1,3 +1,4 @@
+
 @csrf
 
 @if(isset($id))
@@ -18,10 +19,10 @@
     </div>
 
     <div class="form-group row">
-        <label for="preco" class="col-md-4 col-form-label text-md-right">Preço:</label>
+        <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF:</label>
         <div class="col-md-6">
-            <input id="preco" type="number" class="form-control preço @error('preco') is-invalid @enderror" name="preco" value="{{ isset($data) ? $data->preço : '' }}" autocomplete="preco" required autofocus>
-            @error('preco')
+            <input id="cpf" type="text" class="form-control cpf @error('cpf') is-invalid @enderror" name="cpf" value="{{ isset($data) ? $data->cpf : '' }}" autocomplete="cpf" required autofocus>
+            @error('cpf')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -30,16 +31,18 @@
     </div>
 
     <div class="form-group row">
-        <label for="qtd" class="col-md-4 col-form-label text-md-right">Quantidade:</label>
+        <label for="date" class="col-md-4 col-form-label text-md-right">Data de Nascimento:</label>
         <div class="col-md-6">
-            <input id="quantidade" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" autocomplete="quantidade" value="{{ isset($data) ? $data->quantidade : '' }}" required autofocus >
-            @error('quantidade')
+            <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" autocomplete="date" value="{{ isset($data) ? $data->data_nascimento : '' }}" required autofocus >
+            @error('date')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
             </span>
             @enderror
         </div>
     </div>
+
+    <div id="newPhone"></div>
 
     <div class="form-group row mb-2">
         <div class="col-md-6 offset-md-4  ">
@@ -50,4 +53,18 @@
     </div>
 </div>
 
-</div>
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function (){
+            $('.cpf').mask('000.000.000-00')
+        })
+        function addPhone() {
+            let elementCloned = $(`#phone0`).clone();
+            elementCloned[0].children[1].children[0].setAttribute('readonly', true)
+            $('#newPhone').append(elementCloned);
+            $('#phone').val('');
+        }
+    </script>
+@stop

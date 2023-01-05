@@ -14,4 +14,6 @@ class Cliente extends Model
     public function produto(){
         return $this->belongsToMany('App\Models\Pedido');
     }
+
+    protected $fillable = ['nome', 'cpf', 'data_nascimento'];
 }

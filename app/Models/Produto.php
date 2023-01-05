@@ -14,4 +14,5 @@ class Produto extends Model
     public function pedidos(){
         return $this->belongsToMany('App\Models\Pedido','App\Models\Venda');
     }
+    protected $fillable = ['nome', 'preco', 'quantidade'];
 }
