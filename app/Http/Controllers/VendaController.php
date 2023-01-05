@@ -26,7 +26,7 @@ class VendaController extends Controller
      */
     public function create()
     {
-        //
+        return view('venda.create');
     }
 
     /**
