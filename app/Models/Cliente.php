@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
+
+    //função para relacionar as tabelas do banco de dados
+
+    public function produto(){
+        return $this->belongsToMany('App\Models\Pedido');
+    }
 }

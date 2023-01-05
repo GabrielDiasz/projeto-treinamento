@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Vendas')
+@section('title', 'Venda')
 
 @section('content_header')
     <div class="container-fluid">
@@ -9,10 +9,11 @@
                 <h1><strong>Vendas</strong></h1>
             </div>
             <div class="col sm-6">
-                <a href="#" class="btn btn-primary float-sm-right">
+                <a href="{{ route('venda.create') }}" class="btn btn-primary float-sm-right">
                     <i class="fas fa-user-plus"></i>
                     Cadastrar Venda
                 </a>
+                
             </div>
         </div>
     </div>
