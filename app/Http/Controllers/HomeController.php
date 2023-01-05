@@ -29,9 +29,9 @@ class HomeController extends Controller
     public function index()
     {
 
-        $cliente = Cliente::with('vendas')->get();
+        $cliente = Cliente::with('vendas.produtos')->get();
 
-        dd($cliente);
+//        dd($cliente);
 
         $hour = new DateTime('now');
         $hour = $hour->format('H');

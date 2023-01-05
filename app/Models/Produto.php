@@ -14,6 +14,6 @@ class Produto extends Model
     //função para relacionar as tabelas do banco de dados
 
     public function vendas(){
-        return $this->belongsToMany(Venda::class);
+        return $this->belongsToMany(Venda::class)->withPivot('qtd');
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('venda_produto', function (Blueprint $table) {
+        Schema::create('produto_venda', function (Blueprint $table) {
             $table->id();
             $table->foreignId('venda_id')->constrained()
                 ->onDelete('CASCADE')
