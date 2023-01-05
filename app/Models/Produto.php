@@ -9,10 +9,12 @@ class Produto extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'preco', 'quantidade'];
+
     //função para relacionar as tabelas do banco de dados
 
-    public function pedidos(){
-        return $this->belongsToMany('App\Models\Pedido','App\Models\Venda');
+    public function vendas(){
+        return $this->belongsToMany(Venda::class)->withPivot('qtd');
     }
     protected $fillable = ['nome', 'preco', 'quantidade'];
 }

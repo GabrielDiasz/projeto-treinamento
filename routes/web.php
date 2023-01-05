@@ -52,4 +52,3 @@ Route::prefix('produto')->group(function () {
 Route::prefix('venda')->group(function () {
     Route::get('/', [VendaController::class, 'index'])->name('venda.index');
 });
-

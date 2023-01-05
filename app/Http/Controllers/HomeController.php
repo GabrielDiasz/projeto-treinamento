@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Produto;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -26,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $cliente = Cliente::with('vendas.produtos')->get();
+
+//        dd($cliente);
 
         $hour = new DateTime('now');
         $hour = $hour->format('H');
