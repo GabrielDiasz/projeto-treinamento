@@ -47,30 +47,29 @@
                                     <td>{{ $item->data_nascimento}}</td>
                                     <td>
                                         <a href="{{ route('cliente.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
-                                        <form action="{{ route('cliente.delete', $item->id) }}" method="POST" style="display: inline" >
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-danger">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                                            <i class="fas fa-phone"></i>
-                                        </button>
 
-                                        <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Telefone(s)</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel"> Confirmar Exclusão </h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        Deseja Excluir {{$item->nome}}?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                                                        <form action="{{ route('cliente.delete', $item->id) }}" method="POST" style="display: inline" >
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="btn btn-primary">Sim</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
