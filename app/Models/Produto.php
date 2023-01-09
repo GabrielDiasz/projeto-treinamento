@@ -16,5 +16,4 @@ class Produto extends Model
     public function vendas(){
         return $this->belongsToMany(Venda::class)->withPivot('qtd');
     }
-    protected $fillable = ['nome', 'preco', 'quantidade'];
 }
