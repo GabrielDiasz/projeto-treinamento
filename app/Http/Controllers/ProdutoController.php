@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProdutoController extends Controller
 {
@@ -26,7 +28,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produto.create');
     }
 
     /**
@@ -37,7 +39,17 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = new DateTime($request->date);
+
+        Produto::create([
+            'nome' => $request->name,
+            'preco' => $request->preço,
+            'quantidade' => $date,
+
+        ]);
+
+
+        return Redirect::route('cliente.index');
     }
 
     /**
@@ -55,11 +67,14 @@ class ProdutoController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Produto  $produto
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *@return \Illuminate\Http\Response
+     *
      */
-    public function edit(Produto $produto)
+    public function edit(Produto $produto, $id)
     {
-        //
+        $data = Produto::query()->find($id);
+        return view('produto.edit', compact('data', 'id'));
     }
 
     /**
@@ -71,17 +86,30 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $id = $request->id;
+
+        $date = new DateTime($request->date);
+
+        Produto::find($id)->update([
+            'nome' => $request->name,
+            'preco' => $request->Preço,
+            'quantidade' => $date
+        ]);
+
+        return Redirect::route('cliente.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Produto  $produto
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy(Produto $produto, $id)
     {
-        //
+        Produto::destroy($id);
+
+        return Redirect::route('produto.index');
     }
 }
