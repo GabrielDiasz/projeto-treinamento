@@ -40,7 +40,6 @@
                             <tbody>
 
                             @foreach($data as $item)
-{{--                                    @dd($item->produtos[0])--}}
                                 <tr>
                                     <th>{{ $item->id }}</th>
                                     <th>{{ $item->cliente->nome }}</th>

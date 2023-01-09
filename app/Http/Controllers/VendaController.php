@@ -17,6 +17,7 @@ class VendaController extends Controller
     public function index()
     {
         $data = Venda::with('cliente', 'produtos')->paginate(10);
+
         return view('venda.index', compact('data'));
     }
 

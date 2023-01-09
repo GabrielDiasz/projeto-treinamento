@@ -23,7 +23,6 @@ return new class extends Migration
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
-
             $table->integer('qtd');
             $table->timestamps();
         });

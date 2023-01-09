@@ -39,12 +39,11 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        $date = new DateTime($request->date);
 
         Produto::create([
             'nome' => $request->name,
-            'preco' => $request->preço,
-            'quantidade' => $date,
+            'preco' => $request->preco,
+            'quantidade' => $request->quantidade,
 
         ]);
 
@@ -88,12 +87,11 @@ class ProdutoController extends Controller
     {
         $id = $request->id;
 
-        $date = new DateTime($request->date);
 
         Produto::find($id)->update([
             'nome' => $request->name,
-            'preco' => $request->Preço,
-            'quantidade' => $date
+            'preco' => $request->preco,
+            'quantidade' => $request->quantidade
         ]);
 
         return Redirect::route('produto.index');

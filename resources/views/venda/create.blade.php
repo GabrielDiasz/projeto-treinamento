@@ -11,6 +11,10 @@
             <form class="form-horizontal mt-2" action="{{ route('venda.store') }}" method="POST">
                 @csrf
 
+                <div>
+
+                </div>
+
                 <div class="form-group">
                     <select class="form-select" aria-label="Cliente">
                         <option selected>Clientes</option>

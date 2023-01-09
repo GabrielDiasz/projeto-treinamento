@@ -1,0 +1,11 @@
+{
+    "name": "Pdv",
+    "alias": "pdv",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Pdv\\Providers\\PdvServiceProvider"
+    ],
+    "files": []
+}

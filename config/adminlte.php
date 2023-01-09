@@ -322,17 +322,22 @@ return [
         ['header' => 'Telas'],
         [
             'text' => 'Clientes',
-            'url'  => 'cliente/',
+            'route'  => 'cliente.index',
             'icon' => 'fas fa-fw fa-users',
         ],
         [
             'text' => 'Produtos',
-            'url'  => 'produto/',
+            'route'  => 'produto.index',
             'icon' => 'fas fa-fw fa-list',
         ],
         [
             'text' => 'Vendas',
-            'url'  => 'venda/',
+            'route'  => 'venda.index',
+            'icon' => 'fas fa-fw fa-credit-card',
+        ],
+        [
+            'text' => 'PDV',
+            'route'  => 'pdv.index',
             'icon' => 'fas fa-fw fa-credit-card',
         ],
 
