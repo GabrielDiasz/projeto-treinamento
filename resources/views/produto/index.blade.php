@@ -81,11 +81,11 @@
         </div>
         @if(isset($data) && $data->isNotEmpty())
             @if(count($data) == 1)
-                <p><strong>Foi encontrado 1 produto</strong></p>
+                <p><strong>Foi encontrado 1 Produto</strong></p>
             @elseif($data->total() > $data->perPage())
-                <p><strong>Exibindo {{ count($data) }} de um total de {{ $data->total() }} produtos</strong></p>
+                <p><strong>Exibindo {{ count($data) }} de um total de {{ $data->total() }} Produto(s)</strong></p>
             @else
-                <p><strong>Foram encontrados {{ count($data) }} produtos</strong></p>
+                <p><strong>Foram encontrados {{ count($data) }} Produtos</strong></p>
             @endif
             {!! $data->appends($_GET)->links() !!}
         @endif

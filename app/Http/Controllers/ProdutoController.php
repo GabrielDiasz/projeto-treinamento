@@ -16,7 +16,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $data = Produto::all();
+        $data = Produto :: paginate(10);
 
         return view('produto.index', compact('data'));
     }
@@ -49,7 +49,7 @@ class ProdutoController extends Controller
         ]);
 
 
-        return Redirect::route('cliente.index');
+        return Redirect::route('produto.index');
     }
 
     /**
@@ -96,7 +96,7 @@ class ProdutoController extends Controller
             'quantidade' => $date
         ]);
 
-        return Redirect::route('cliente.index');
+        return Redirect::route('produto.index');
     }
 
     /**
