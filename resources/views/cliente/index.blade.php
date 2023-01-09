@@ -3,17 +3,34 @@
 @section('title', 'Clientes')
 
 @section('content_header')
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col sm-6">
                 <h1><strong>Clientes</strong></h1>
             </div>
+
             <div class="col sm-6">
                 <a href="{{ route('cliente.create') }}" class="btn btn-primary float-sm-right">
                     <i class="fas fa-user-plus"></i>
                     Cadastrar Cliente
                 </a>
             </div>
+        </div>
+        <br>
+        <div>
+
+            @if(session()->has('message'))
+
+                <div class="alert alert-success" id="alert">
+                    <button type="button" class="close"
+                    data-dismiss="alert">x</button>
+
+                    {{session()->get('message')}}
+                </div>
+
+            @endif
         </div>
     </div>
 @stop
@@ -69,6 +86,7 @@
                                                             @method('DELETE')
                                                             @csrf
                                                             <button class="btn btn-primary">Sim</button>
+
                                                         </form>
                                                     </div>
                                                 </div>
@@ -87,6 +105,20 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+
+            $("document").ready(function()
+                {
+                    setTimeout(function ()
+                    {
+                        $("div.alert").remove();
+                    },3000);
+                });
+        </script>
         @if(isset($data) && $data->isNotEmpty())
             @if(count($data) == 1)
                 <p><strong>Foi encontrado 1 registro</strong></p>
