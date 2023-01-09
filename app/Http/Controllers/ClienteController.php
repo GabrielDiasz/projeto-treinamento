@@ -117,6 +117,6 @@ class ClienteController extends Controller
     {
         Cliente::destroy($id);
 
-        return Redirect::route('cliente.index');
+        return Redirect::route('cliente.index')->with('message', 'Cliente Excluido Com Sucesso');
     }
 }
