@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>{{ $item->id }}</th>
                                     <th>{{ $item->nome }}</th>
-                                    <td>{{ $item->preço }}</td>
+                                    <td>R$ {{ $item->preco }}</td>
                                     <td>{{ $item->quantidade}}</td>
                                     <td>
                                         <a href="{{ route('produto.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>

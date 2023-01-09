@@ -20,7 +20,7 @@
     <div class="form-group row">
         <label for="preco" class="col-md-4 col-form-label text-md-right">Preço:</label>
         <div class="col-md-6">
-            <input id="preco" type="number" class="form-control preço @error('preco') is-invalid @enderror" name="preco" value="{{ isset($data) ? $data->preço : '' }}" autocomplete="preco" required autofocus>
+            <input id="preco" type="number" class="form-control preco @error('preco') is-invalid @enderror" name="preco" value="{{ isset($data) ? $data->preco : '' }}" autocomplete="preco" required autofocus>
             @error('preco')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="qtd" class="col-md-4 col-form-label text-md-right">Quantidade:</label>
+        <label for="quantidade" class="col-md-4 col-form-label text-md-right">Quantidade:</label>
         <div class="col-md-6">
             <input id="quantidade" type="number" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" autocomplete="quantidade" value="{{ isset($data) ? $data->quantidade : '' }}" required autofocus >
             @error('quantidade')
