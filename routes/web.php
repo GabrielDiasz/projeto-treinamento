@@ -30,7 +30,6 @@ Route::prefix('cliente')->group(function () {
     Route::get('/create', [ClienteController::class, 'create'])->name('cliente.create');
     Route::post('/store', [ClienteController::class, 'store'])->name('cliente.store');
 
-
     Route::get('/edit/{id}', [ClienteController::class, 'edit'])->name('cliente.edit');
     Route::put('/update', [ClienteController::class, 'update'])->name('cliente.update');
 
@@ -40,10 +39,12 @@ Route::prefix('cliente')->group(function () {
 Route::prefix('produto')->group(function () {
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
 
+    Route::get('/find/{codebar}', [ProdutoController::class, 'findproduct'])->name('produto.find');
+
     Route::get('/create', [ProdutoController::class, 'create'])->name('produto.create');
     Route::post('/store',[ProdutoController::class, 'store'])->name('produto.store');
 
-    Route::get('edit/{id}',[ProdutoController::class, 'edit'])->name('produto.edit');
+    Route::get('/edit/{id}',[ProdutoController::class, 'edit'])->name('produto.edit');
     Route::put('/update',[ProdutoController::class,'update'])->name('produto.update');
 
     Route::delete('/delete/{id}',[ProdutoController::class, 'destroy'])->name('produto.delete');
@@ -51,4 +52,12 @@ Route::prefix('produto')->group(function () {
 
 Route::prefix('venda')->group(function () {
     Route::get('/', [VendaController::class, 'index'])->name('venda.index');
+
+    Route::get('/create', [VendaController::class, 'create'])->name('venda.create');
+    Route::post('/store', [VendaController::class, 'store'])->name('venda.store');
+
+    Route::get('/edit/{id}', [VendaController::class, 'edit'])->name('venda.edit');
+    Route::post('/update', [VendaController::class, 'update'])->name('venda.update');
+
+    Route::delete('/delete/{id}', [VendaController::class, 'destroy'])->name('venda.delete');
 });

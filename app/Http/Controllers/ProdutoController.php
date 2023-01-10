@@ -39,12 +39,12 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        $date = new DateTime($request->date);
 
         Produto::create([
             'nome' => $request->name,
-            'preco' => $request->preço,
-            'quantidade' => $date,
+            'preco' => $request->preco,
+            'quantidade' => $request->quantidade,
+            'codebar' => $request->codebar,
 
         ]);
 
@@ -88,12 +88,12 @@ class ProdutoController extends Controller
     {
         $id = $request->id;
 
-        $date = new DateTime($request->date);
 
         Produto::find($id)->update([
             'nome' => $request->name,
-            'preco' => $request->Preço,
-            'quantidade' => $date
+            'preco' => $request->preco,
+            'quantidade' => $request->quantidade,
+            'codebar' => $request->codebar
         ]);
 
         return Redirect::route('produto.index');
@@ -111,5 +111,11 @@ class ProdutoController extends Controller
         Produto::destroy($id);
 
         return Redirect::route('produto.index');
+    }
+
+    public function findproduct($codebar)
+    {
+        $produto = Produto::where('codebar', $codebar)->first();
+        return response()->json($produto);
     }
 }

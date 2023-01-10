@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Produto;
 use App\Models\Venda;
 use Illuminate\Http\Request;
 
@@ -14,9 +16,9 @@ class VendaController extends Controller
      */
     public function index()
     {
-        $data = Venda::all();
+        $data = Venda::with('cliente', 'produtos')->paginate(10);
 
-        return view('venda.index');
+        return view('venda.index', compact('data'));
     }
 
     /**
@@ -26,7 +28,12 @@ class VendaController extends Controller
      */
     public function create()
     {
-        return view('venda.create');
+
+        $clientes = Cliente::all();
+
+        $produtos = Produto::all();
+
+        return view('venda.create', compact('clientes', 'produtos'));
     }
 
     /**
