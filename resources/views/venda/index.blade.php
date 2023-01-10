@@ -44,7 +44,7 @@
                                     <th>{{ $item->id }}</th>
                                     <th>{{ $item->cliente->nome }}</th>
                                     <td>{{ $item->cliente->cpf }}</td>
-                                    <td>R$ {{ $item->produtos[0]->preco * $item->produtos[0]->pivot->qtd }}</td>
+                                    <td>R${{ $item->produtos[0]->preco * $item->produtos[0]->pivot->qtd }}</td>
                                     <td>
                                         <a href="{{ route('venda.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
                                         <form action="{{ route('venda.delete', $item->id) }}" method="POST" style="display: inline" >
