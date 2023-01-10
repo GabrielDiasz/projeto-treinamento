@@ -14,38 +14,32 @@
     <div class="row col-md-12">
 
         <div class="col-md-6 mt-3">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Lista de Produtos</h3>
-                        </div>
-                            <div class="card-body">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Nome do produto</th>
-                                        <th>Preço</th>
-                                        <th>Quantidade</th>
-                                        <th>Código de barras</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="item">
-                                       {{--  A th vai entrar aqui--}}
-                                    </tbody>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Lista de Produtos</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nome do produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Código de barras</th>
+                        </tr>
+                        </thead>
+                        <tbody id="item">
+                        {{--  A th vai entrar aqui--}}
+                        </tbody>
 
-                                </table>
-                            </div>
-                    </div>
+                    </table>
                 </div>
             </div>
-
-
         </div>
 
         <div class="col-md-6 d-flex flex-column">
-            <div class="col-md-12 total d-flex justify-content-center">
-                Total: R$ 500
+            <div id="total" class="col-md-12 total d-flex justify-content-center">
+
             </div>
 
             <div class="col-md-12 d-flex flex-row ">
@@ -65,7 +59,7 @@
             </div>
 
             <div class="col-md-12 d-flex flex-row">
-                <button class="btn btn-primary" onclick="addproduct()">
+                <button class="btn btn-primary" onclick="addProduct()">
                     Enviar Produto
                 </button>
 
@@ -81,31 +75,30 @@
 @section('js')
     <script>
         let products = '';
-
-        function addproduct() {
+        let total = 0;
+        function addProduct() {
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
             $.ajax({
                 url: '/produto/find/' + codebar,
                 type: 'GET',
                 dataType: 'json',
-                success:function (data) {
-                    console.log(data)
+                success: data => {
 
                     let item = `
                         <tr>
                             <th id="nome">${data.nome}</th>
-                            <th id="price">R$ ${data.preco}</th>
+                            <th id="price">R$${data.preco}</th>
                             <td id="amount">${qtd}</td>
                             <td id="codebar">${data.codebar}</td>
                         </tr>
                     `;
 
                     products = products + item;
+                    $('#item').html(products);
 
-                    $('#item').html(products)
-
-
+                    total = total + (qtd * data.preco);
+                    $('#total').html(`Total: R$${total}`);
                 }
             })
         }
