@@ -13,8 +13,9 @@
 @section('content')
     <div class="row col-md-12">
 
-        <div class="col-md-6">
-
+        <div class="col-md-6" id="itens">
+            <div></div>
+            <div id="itens"></div>
         </div>
 
         <div class="col-md-6 d-flex flex-column">
@@ -25,8 +26,8 @@
             <div class="col-md-12 d-flex flex-row ">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="barcode">Código de barras:</label>
-                        <input class="form-control" type="text" name="barcode" id="barcode">
+                        <label for="codebar">Código de barras:</label>
+                        <input class="form-control" type="text" name="codebar" id="codebar">
                     </div>
                 </div>
 
@@ -39,7 +40,7 @@
             </div>
 
             <div class="col-md-12 d-flex flex-row">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" onclick="addproduct()">
                     Enviar Produto
                 </button>
 
@@ -51,3 +52,26 @@
 
     </div>
 @stop
+
+@section('js')
+    <script>
+        let products = '';
+        function addproduct() {
+            let codebar = $('input[name="codebar"]').val();
+            let qtd = $('input[name="quantidade"]').val();
+            $.ajax({
+                url: '/produto/find/' + codebar,
+                type: 'GET',
+                dataType: 'json',
+                success:function (data) {
+                    // console.log(data)
+                    let item = '<p> id' + data.id + '-' + data.nome + '-' + qtd + '</p>';
+                    products = products + item;
+                    $('#itens').html(products);
+                }
+
+            })
+            console.log(products)
+        }
+    </script>
+@endsection

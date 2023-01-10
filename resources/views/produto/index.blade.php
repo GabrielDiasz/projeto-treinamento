@@ -34,6 +34,7 @@
                                 <th>Nome</th>
                                 <th>Preço</th>
                                 <th>Quantidade</th>
+                                <th>Código de barras</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                     <th>{{ $item->nome }}</th>
                                     <td>R${{ $item->preco }}</td>
                                     <td>{{ $item->quantidade}}</td>
+                                    <td>{{ $item->codebar }}</td>
                                     <td>
                                         <a href="{{ route('produto.edit', $item->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i> </a>
                                         <form action="{{ route('produto.delete', $item->id) }}" method="POST" style="display: inline" >

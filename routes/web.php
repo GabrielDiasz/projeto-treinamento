@@ -39,6 +39,8 @@ Route::prefix('cliente')->group(function () {
 Route::prefix('produto')->group(function () {
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
 
+    Route::get('/find/{codebar}', [ProdutoController::class, 'findproduct'])->name('produto.find');
+
     Route::get('/create', [ProdutoController::class, 'create'])->name('produto.create');
     Route::post('/store',[ProdutoController::class, 'store'])->name('produto.store');
 

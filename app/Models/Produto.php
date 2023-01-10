@@ -9,7 +9,7 @@ class Produto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'preco', 'quantidade'];
+    protected $fillable = ['nome', 'preco', 'quantidade', 'codebar'];
 
     //função para relacionar as tabelas do banco de dados
 

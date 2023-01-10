@@ -44,6 +44,7 @@ class ProdutoController extends Controller
             'nome' => $request->name,
             'preco' => $request->preco,
             'quantidade' => $request->quantidade,
+            'codebar' => $request->codebar,
 
         ]);
 
@@ -91,7 +92,8 @@ class ProdutoController extends Controller
         Produto::find($id)->update([
             'nome' => $request->name,
             'preco' => $request->preco,
-            'quantidade' => $request->quantidade
+            'quantidade' => $request->quantidade,
+            'codebar' => $request->codebar
         ]);
 
         return Redirect::route('produto.index');
@@ -109,5 +111,11 @@ class ProdutoController extends Controller
         Produto::destroy($id);
 
         return Redirect::route('produto.index');
+    }
+
+    public function findproduct($codebar)
+    {
+        $produto = Produto::where('codebar', $codebar)->first();
+        return response()->json($produto);
     }
 }
