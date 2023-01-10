@@ -13,9 +13,34 @@
 @section('content')
     <div class="row col-md-12">
 
-        <div class="col-md-6" id="itens">
-            <div></div>
-            <div id="itens"></div>
+        <div class="col-md-6 mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Lista de Produtos</h3>
+                        </div>
+                            <div class="card-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nome do produto</th>
+                                        <th>Preço</th>
+                                        <th>Quantidade</th>
+                                        <th>Código de barras</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="item">
+                                       {{--  A th vai entrar aqui--}}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="col-md-6 d-flex flex-column">
@@ -56,6 +81,7 @@
 @section('js')
     <script>
         let products = '';
+
         function addproduct() {
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
@@ -64,14 +90,24 @@
                 type: 'GET',
                 dataType: 'json',
                 success:function (data) {
-                    // console.log(data)
-                    let item = '<p> id' + data.id + '-' + data.nome + '-' + qtd + '</p>';
-                    products = products + item;
-                    $('#itens').html(products);
-                }
+                    console.log(data)
 
+                    let item = `
+                        <tr>
+                            <th id="nome">${data.nome}</th>
+                            <th id="price">R$ ${data.preco}</th>
+                            <td id="amount">${qtd}</td>
+                            <td id="codebar">${data.codebar}</td>
+                        </tr>
+                    `;
+
+                    products = products + item;
+
+                    $('#item').html(products)
+
+
+                }
             })
-            console.log(products)
         }
     </script>
 @endsection
