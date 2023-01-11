@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('pdv')->group(function() {
     Route::get('/', 'PdvController@index')->name('pdv.index');
-    Route::post('/store', 'PdvController@index');
+    Route::post('/store', 'PdvController@store')->name('pdv.store');
 });

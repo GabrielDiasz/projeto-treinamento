@@ -84,8 +84,10 @@
     <script>
         let products = '';
         let total = 0;
+        let venda_id = '';
 
         function addProduct() {
+            createsale();
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
             $.ajax({
@@ -117,15 +119,17 @@
 
             if (codebar !== '' && qtd !== ''){
                 $.ajax({
-                    url: '',
+                    url: 'pdv/store',
                     type: 'POST',
                     data: {
                         "_token": "{{ csrf_token() }}",
                         codebar: codebar,
                         qtd: qtd,
+                        venda_id: venda_id,
                     },
                     success: response => {
-
+                        venda_id = response.id
+                        total = response.total
                     }
 
 
