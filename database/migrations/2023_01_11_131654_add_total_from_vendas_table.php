@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vendas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->foreignId('cliente_id')->constrained()
-                ->onDelete('CASCADE')
-                ->onUpdate('CASCADE')
-                ->nullable();
-
+        Schema::table('vendas', function (Blueprint $table) {
+            $table->float('total',12,2)->after('id');
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendas');
+        Schema::table('vendas', function (Blueprint $table) {
+            $table->dropColumn('total');
+        });
     }
 };

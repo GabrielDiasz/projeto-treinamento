@@ -111,5 +111,31 @@
                 }
             })
         }
+        function createsale(){
+            let codebar = $('input[name="codebar"]').val();
+            let qtd = $('input[name="quantidade"]').val();
+
+            if (codebar !== '' && qtd !== ''){
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        codebar: codebar,
+                        qtd: qtd,
+                    },
+                    success: response => {
+
+                    }
+
+
+
+                });
+            };
+
+        }
+
+
+
     </script>
 @endsection
