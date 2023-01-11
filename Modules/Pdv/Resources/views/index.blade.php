@@ -44,8 +44,8 @@
         </div>
 
         <div class="col-md-6 d-flex flex-column">
-            <div class="col-md-12 total d-flex justify-content-center">
-                Total: R$ 500
+            <div id="total"  class="col-md-12 total d-flex justify-content-center">
+{{--               Total: R$ 500--}}
             </div>
 
             <div class="col-md-12 d-flex flex-row ">
@@ -81,6 +81,7 @@
 @section('js')
     <script>
         let products = '';
+        let total = 0;
 
         function addproduct() {
             let codebar = $('input[name="codebar"]').val();
@@ -100,12 +101,11 @@
                             <td id="codebar">${data.codebar}</td>
                         </tr>
                     `;
-
                     products = products + item;
-
                     $('#item').html(products)
 
-
+                    total = (qtd * data.preco);
+                    $('#total').html(`total : R$ ${total}`);
                 }
             })
         }
