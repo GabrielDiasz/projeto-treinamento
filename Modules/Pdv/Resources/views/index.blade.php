@@ -7,18 +7,27 @@
         .total {
             font-size: 42px;
         }
+
+        .table-overflow {
+            max-height:800px;
+            overflow-y:auto;
+        }
+
+        body {
+            height: 100%;
+            width: 100vw;
+        }
     </style>
 @stop
 
 @section('content')
     <div class="row col-md-12">
-
         <div class="col-md-6 mt-3">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Lista de Produtos</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-overflow">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
@@ -29,7 +38,7 @@
                         </tr>
                         </thead>
                         <tbody id="item">
-                        {{--  A th vai entrar aqui--}}
+                        {{-- A th vai entrar aqui--}}
                         </tbody>
 
                     </table>
@@ -37,9 +46,9 @@
             </div>
         </div>
 
-        <div class="col-md-6 d-flex flex-column">
+        <div class="col-md-6 mt-3">
             <div id="total" class="col-md-12 total d-flex justify-content-center">
-
+                {{--Total entra aqui--}}
             </div>
 
             <div class="col-md-12 d-flex flex-row ">
@@ -58,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 d-flex flex-row">
+            <div class="col-md-12 d-flex flex-row justify-content-between">
                 <button class="btn btn-primary" onclick="addProduct()">
                     Enviar Produto
                 </button>
@@ -68,7 +77,6 @@
                 </button>
             </div>
         </div>
-
     </div>
 @stop
 
@@ -76,6 +84,7 @@
     <script>
         let products = '';
         let total = 0;
+
         function addProduct() {
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
@@ -98,7 +107,7 @@
                     $('#item').html(products);
 
                     total = total + (qtd * data.preco);
-                    $('#total').html(`Total: R$${total}`);
+                    $('#total').html(`Total: R$${total.toFixed(2)}`);
                 }
             })
         }
