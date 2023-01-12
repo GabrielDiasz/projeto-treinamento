@@ -38,7 +38,16 @@
                         </tr>
                         </thead>
                         <tbody id="item">
-                        {{-- A th vai entrar aqui--}}
+                            @if(isset($venda))
+                                @foreach($venda->produtos as $key => $produto)
+                                    <tr>
+                                        <th>{{$produto->nome}}</th>
+                                        <th>R${{$produto->preco}}</th>
+                                        <td>{{$venda->vendaProdutos[$key]->qtd}}</td>
+                                        <td>{{$produto->codebar}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
 
                     </table>
@@ -46,15 +55,11 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-        <div class="col-md-6 d-flex flex-column">
-            <div id="total"  class="col-md-12 total d-flex justify-content-center">
-{{--               Total: R$ 500--}}
-=======
         <div class="col-md-6 mt-3">
             <div id="total" class="col-md-12 total d-flex justify-content-center">
-                {{--Total entra aqui--}}
->>>>>>> main
+                @if(isset($total))
+                    Total: R${{ $total }}
+                @endif
             </div>
 
             <div class="col-md-12 d-flex flex-row ">
@@ -90,41 +95,32 @@
     <script>
         let products = '';
         let total = 0;
-<<<<<<< HEAD
-=======
         let venda_id = '';
->>>>>>> main
 
         function addProduct() {
             createsale();
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
             $.ajax({
-                url: '/produto/find/' + codebar,
+                url: '/pdv/listProductSale',
                 type: 'GET',
                 dataType: 'json',
                 success: data => {
+                    console.log(data);
+                    // let item = `
+                    //     <tr>
+                    //         <th>${data.nome}</th>
+                    //         <th>R$${data.preco}</th>
+                    //         <td>${qtd}</td>
+                    //         <td>${data.codebar}</td>
+                    //     </tr>
+                    // `;
+                    //
+                    // products = products + item;
+                    // $('#item').html(products);
 
-                    let item = `
-                        <tr>
-                            <th id="nome">${data.nome}</th>
-                            <th id="price">R$${data.preco}</th>
-                            <td id="amount">${qtd}</td>
-                            <td id="codebar">${data.codebar}</td>
-                        </tr>
-                    `;
-                    products = products + item;
-<<<<<<< HEAD
-                    $('#item').html(products)
-
-                    total = (qtd * data.preco);
-                    $('#total').html(`total : R$ ${total}`);
-=======
-                    $('#item').html(products);
-
-                    total = total + (qtd * data.preco);
-                    $('#total').html(`Total: R$${total.toFixed(2)}`);
->>>>>>> main
+                    // total = total + (qtd * data.preco);
+                    // $('#total').html(`Total: R$${total.toFixed(2)}`);
                 }
             })
         }
@@ -145,16 +141,10 @@
                     success: response => {
                         venda_id = response.id
                         total = response.total
+                        $('#total').html(`Total: R$${total.toFixed(2)}`)
                     }
-
-
-
                 });
-            };
-
+            }
         }
-
-
-
     </script>
 @endsection
