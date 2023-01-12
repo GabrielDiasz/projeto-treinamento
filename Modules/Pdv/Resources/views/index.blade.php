@@ -7,45 +7,54 @@
         .total {
             font-size: 42px;
         }
+
+        .table-overflow {
+            max-height:800px;
+            overflow-y:auto;
+        }
+
+        body {
+            height: 100%;
+            width: 100vw;
+        }
     </style>
 @stop
 
 @section('content')
     <div class="row col-md-12">
-
         <div class="col-md-6 mt-3">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Lista de Produtos</h3>
-                        </div>
-                            <div class="card-body">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Nome do produto</th>
-                                        <th>Preço</th>
-                                        <th>Quantidade</th>
-                                        <th>Código de barras</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="item">
-                                       {{--  A th vai entrar aqui--}}
-                                    </tbody>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Lista de Produtos</h3>
+                </div>
+                <div class="card-body table-overflow">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nome do produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Código de barras</th>
+                        </tr>
+                        </thead>
+                        <tbody id="item">
+                        {{-- A th vai entrar aqui--}}
+                        </tbody>
 
-                                </table>
-                            </div>
-                    </div>
+                    </table>
                 </div>
             </div>
-
-
         </div>
 
+<<<<<<< HEAD
         <div class="col-md-6 d-flex flex-column">
             <div id="total"  class="col-md-12 total d-flex justify-content-center">
 {{--               Total: R$ 500--}}
+=======
+        <div class="col-md-6 mt-3">
+            <div id="total" class="col-md-12 total d-flex justify-content-center">
+                {{--Total entra aqui--}}
+>>>>>>> main
             </div>
 
             <div class="col-md-12 d-flex flex-row ">
@@ -64,8 +73,8 @@
                 </div>
             </div>
 
-            <div class="col-md-12 d-flex flex-row">
-                <button class="btn btn-primary" onclick="addproduct()">
+            <div class="col-md-12 d-flex flex-row justify-content-between">
+                <button class="btn btn-primary" onclick="addProduct()">
                     Enviar Produto
                 </button>
 
@@ -74,7 +83,6 @@
                 </button>
             </div>
         </div>
-
     </div>
 @stop
 
@@ -82,32 +90,71 @@
     <script>
         let products = '';
         let total = 0;
+<<<<<<< HEAD
+=======
+        let venda_id = '';
+>>>>>>> main
 
-        function addproduct() {
+        function addProduct() {
+            createsale();
             let codebar = $('input[name="codebar"]').val();
             let qtd = $('input[name="quantidade"]').val();
             $.ajax({
                 url: '/produto/find/' + codebar,
                 type: 'GET',
                 dataType: 'json',
-                success:function (data) {
-                    console.log(data)
+                success: data => {
 
                     let item = `
                         <tr>
                             <th id="nome">${data.nome}</th>
-                            <th id="price">R$ ${data.preco}</th>
+                            <th id="price">R$${data.preco}</th>
                             <td id="amount">${qtd}</td>
                             <td id="codebar">${data.codebar}</td>
                         </tr>
                     `;
                     products = products + item;
+<<<<<<< HEAD
                     $('#item').html(products)
 
                     total = (qtd * data.preco);
                     $('#total').html(`total : R$ ${total}`);
+=======
+                    $('#item').html(products);
+
+                    total = total + (qtd * data.preco);
+                    $('#total').html(`Total: R$${total.toFixed(2)}`);
+>>>>>>> main
                 }
             })
         }
+        function createsale(){
+            let codebar = $('input[name="codebar"]').val();
+            let qtd = $('input[name="quantidade"]').val();
+
+            if (codebar !== '' && qtd !== ''){
+                $.ajax({
+                    url: 'pdv/store',
+                    type: 'POST',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        codebar: codebar,
+                        qtd: qtd,
+                        venda_id: venda_id,
+                    },
+                    success: response => {
+                        venda_id = response.id
+                        total = response.total
+                    }
+
+
+
+                });
+            };
+
+        }
+
+
+
     </script>
 @endsection

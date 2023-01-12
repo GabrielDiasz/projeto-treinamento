@@ -2,6 +2,9 @@
 
 namespace Modules\Pdv\Http\Controllers;
 
+use App\Models\Produto;
+use App\Models\Venda;
+use App\Models\VendaProduto;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -33,7 +36,22 @@ class PdvController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $venda_id = $request->venda_id;
+        $product = Produto::where('codebar', $request->codebar)->first();
+        if ($venda_id == null) {
+            $venda = Venda::create([
+                'total' => 0
+            ]);
+        }
+
+        VendaProduto::create([
+
+            'produto_id' => $product->id,
+            'venda_id' => $venda_id,
+            'qtd' => $request->qtd
+        ]);
+
+        return response()->json($venda);
     }
 
     /**

@@ -17,9 +17,15 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('cliente_id')->constrained()
+            $table->unsignedBigInteger('cliente_id')->nullable();
+
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+//                ->nullable();
+
         });
     }
 
