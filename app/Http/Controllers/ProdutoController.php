@@ -115,7 +115,10 @@ class ProdutoController extends Controller
 
     public function findproduct($codebar)
     {
-        $produto = Produto::where('codebar', $codebar)->first();
-        return response()->json($produto);
+        $produtos = Produto::with('vendas')->where('codebar', $codebar)->first();
+
+        $html = view('produto.partial.table', compact('produtos'))->render();
+
+        return response()->json($html);
     }
 }
