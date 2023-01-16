@@ -25,4 +25,8 @@ class Venda extends Model
         return $this->belongsToMany(Produto::class)->withPivot('qtd');
     }
 
+    public function vendaProdutos()
+    {
+        return $this->hasMany(VendaProduto::class);
+    }
 }

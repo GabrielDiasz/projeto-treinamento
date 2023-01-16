@@ -17,7 +17,11 @@ class PdvController extends Controller
      */
     public function index()
     {
-        return view('pdv::index');
+        if (session()->get('venda_id')) {
+            $venda = Venda::with('vendaProdutos', 'produtos')->find(session()->get('venda_id'));
+            $total = $venda->total;
+        }
+        return view('pdv::index', compact('total', 'venda'));
     }
 
     /**
@@ -36,19 +40,35 @@ class PdvController extends Controller
      */
     public function store(Request $request)
     {
-        $venda_id = $request->venda_id;
+
+        $venda_id = session()->get('venda_id');
+
         $product = Produto::where('codebar', $request->codebar)->first();
+
         if ($venda_id == null) {
             $venda = Venda::create([
                 'total' => 0
             ]);
+
+            $venda_id = $venda->id;
+
+            session()->put('venda_id', $venda_id);
         }
 
         VendaProduto::create([
-
             'produto_id' => $product->id,
             'venda_id' => $venda_id,
             'qtd' => $request->qtd
+        ]);
+
+        $venda = Venda::find($venda_id);
+
+        $total = $venda->total;
+
+        $total = $total + ($product->preco * $request->qtd);
+
+        $venda->update([
+            'total' => $total
         ]);
 
         return response()->json($venda);
@@ -93,5 +113,14 @@ class PdvController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function listProductSale()
+    {
+        $venda = Venda::with('vendaProdutos', 'produtos')->find(session()->get('venda_id'));
+
+        $html = view('pdv::partial.table', compact('venda'))->render();
+
+        return response()->json($html);
     }
 }
