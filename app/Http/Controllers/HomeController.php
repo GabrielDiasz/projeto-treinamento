@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Type\Integer;
 
 class HomeController extends Controller
@@ -36,7 +37,7 @@ class HomeController extends Controller
         $hour = new DateTime('now');
         $hour = $hour->format('H');
 
-        $name = User::all()[0]->name;
+        $name = Auth::user()->name;
 
         if ($hour >= 6 && $hour < 12) {
             $message = 'Bom dia ' . $name . '!';

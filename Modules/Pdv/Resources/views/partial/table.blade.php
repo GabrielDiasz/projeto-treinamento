@@ -1,4 +1,6 @@
-@foreach($produtos as $key => $produto)
+{{--@dd($venda)--}}
+
+@foreach($venda->produtos as $key => $produto)
     <tr>
         <th>{{$produto->nome}}</th>
         <th>R${{$produto->preco}}</th>

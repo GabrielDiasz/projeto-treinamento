@@ -40,7 +40,6 @@ class PdvController extends Controller
      */
     public function store(Request $request)
     {
-
         $venda_id = session()->get('venda_id');
 
         $product = Produto::where('codebar', $request->codebar)->first();
